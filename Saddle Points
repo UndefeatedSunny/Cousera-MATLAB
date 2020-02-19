@@ -1,0 +1,16 @@
+Write a function called saddle that finds saddle points in the input matrix M. For the purposes of this problem, a saddle point is defined as an element whose value is greater than or equal to every element in its row, and less than or equal to every element in its column. Note that there may be more than one saddle point in M. Return a matrix called indices that has exactly two columns. Each row of indices corresponds to one saddle point with the first element of the row containing the row index of the saddle point and the second element containing the column index. If there is no saddle point in M, then indices is the empty array.
+
+/* Solution */
+function indices = saddle(M)
+s = size(M);
+[max_per_row] = max(M, [], 2);
+[min_per_col] = min(M, [], 1);
+indices = [];
+for j=1:s(2)
+    for i=1:s(1)
+        if M(i,j) >= max_per_row(i) && M(i,j) <= min_per_col(j)
+            indices = [indices; [i, j]];
+        end
+    end
+end
+end
